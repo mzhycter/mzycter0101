@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mzycter0101 | 个人工具集</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span>mzycter0101</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-section="home">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="#crawlers" class="nav-link" data-section="crawlers">
+                    <i class="fas fa-spider"></i> 爬虫工具
+                </a>
+                <a href="#utilities" class="nav-link" data-section="utilities">
+                    <i class="fas fa-tools"></i> 实用脚本
+                </a>
+                <a href="#about" class="nav-link" data-section="about">
+                    <i class="fas fa-user"></i> 关于
+                </a>
+            </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页区域 -->
+    <section id="home" class="section hero-section active">
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <i class="fas fa-terminal"></i>
+            </div>
+            <h1 class="hero-title">
+                <span class="typing-text">个人脚本与爬虫工具集</span>
+            </h1>
+            <p class="hero-subtitle">实用的Python工具集合，助力日常开发与数据处理</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="6">0</span>
+                    <span class="stat-label">工具数量</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span>
+                    <span class="stat-label">爬虫工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="3">0</span>
+                    <span class="stat-label">实用脚本</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#crawlers" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> 开始探索
+                </a>
+                <a href="https://github.com/mzhycter/mzycter0101" target="_blank" class="btn btn-outline">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+        <div class="hero-decoration">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- 爬虫工具区域 -->
+    <section id="crawlers" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-spider"></i> 爬虫工具集
+                </h2>
+                <p class="section-desc">强大的网络爬虫和数据采集工具</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- 网页抓取工具 -->
+                <div class="tool-card" data-tool="web-scraper">
+                    <div class="tool-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">网页内容抓取器</h3>
+                        <p class="tool-desc">抓取网页内容、提取文本、保存为多种格式</p>
+                        <div class="tool-tags">
+                            <span class="tag">网页抓取</span>
+                            <span class="tag">文本提取</span>
+                            <span class="tag">Markdown</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('web-scraper')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/crawlers/web_scraper.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 资源下载器 -->
+                <div class="tool-card" data-tool="resource-downloader">
+                    <div class="tool-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">资源下载器</h3>
+                        <p class="tool-desc">批量下载图片、视频、文档，支持断点续传</p>
+                        <div class="tool-tags">
+                            <span class="tag">批量下载</span>
+                            <span class="tag">断点续传</span>
+                            <span class="tag">多线程</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('resource-downloader')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/crawlers/resource_downloader.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据监控工具 -->
+                <div class="tool-card" data-tool="data-monitor">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">数据监控工具</h3>
+                        <p class="tool-desc">监控网页变化、价格追踪、内容更新提醒</p>
+                        <div class="tool-tags">
+                            <span class="tag">价格监控</span>
+                            <span class="tag">变化检测</span>
+                            <span class="tag">定时任务</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('data-monitor')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/crawlers/data_monitor.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实用脚本区域 -->
+    <section id="utilities" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-tools"></i> 实用脚本集
+                </h2>
+                <p class="section-desc">提高工作效率的实用工具脚本</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- 文件处理工具 -->
+                <div class="tool-card" data-tool="file-processor">
+                    <div class="tool-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">文件批量处理器</h3>
+                        <p class="tool-desc">批量重命名、格式转换、文件整理、重复检测</p>
+                        <div class="tool-tags">
+                            <span class="tag">批量重命名</span>
+                            <span class="tag">文件整理</span>
+                            <span class="tag">重复检测</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('file-processor')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/utilities/file_processor.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文本处理工具 -->
+                <div class="tool-card" data-tool="text-processor">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">文本处理工具</h3>
+                        <p class="tool-desc">文本清洗、格式转换、编码检测、关键词提取</p>
+                        <div class="tool-tags">
+                            <span class="tag">文本清洗</span>
+                            <span class="tag">关键词提取</span>
+                            <span class="tag">编码检测</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('text-processor')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/utilities/text_processor.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 系统工具 -->
+                <div class="tool-card" data-tool="system-tools">
+                    <div class="tool-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">系统工具集</h3>
+                        <p class="tool-desc">系统信息、进程管理、资源监控、环境变量</p>
+                        <div class="tool-tags">
+                            <span class="tag">系统监控</span>
+                            <span class="tag">进程管理</span>
+                            <span class="tag">资源统计</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('system-tools')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/utilities/system_tools.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于页面 -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-info">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-circle"></i> 关于本项目
+                    </h2>
+                    <p class="about-text">
+                        这是一个个人脚本与爬虫工具集合，旨在提供实用的Python工具，
+                        帮助开发者提高工作效率，简化日常开发与数据处理任务。
+                    </p>
+                    <p class="about-text">
+                        所有工具均采用Python编写，代码简洁易懂，支持命令行操作，
+                        可根据需求进行二次开发和定制。
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>开源免费，代码透明</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>详细文档，易于上手</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>持续更新，功能完善</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>支持定制，灵活扩展</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-tech">
+                    <h3>技术栈</h3>
+                    <div class="tech-icons">
+                        <div class="tech-item" title="Python">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-item" title="BeautifulSoup">
+                            <i class="fas fa-code"></i>
+                            <span>BeautifulSoup</span>
+                        </div>
+                        <div class="tech-item" title="Requests">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Requests</span>
+                        </div>
+                        <div class="tech-item" title="HTML5">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-item" title="CSS3">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-item" title="JavaScript">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工具详情模态框 -->
+    <div id="tool-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"></h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-desc"></div>
+                <div class="modal-usage">
+                    <h4><i class="fas fa-terminal"></i> 使用方法</h4>
+                    <pre><code class="language-bash"></code></pre>
+                </div>
+                <div class="modal-features">
+                    <h4><i class="fas fa-star"></i> 功能特点</h4>
+                    <ul class="features-list"></ul>
+                </div>
+                <div class="modal-dependencies">
+                    <h4><i class="fas fa-cube"></i> 依赖安装</h4>
+                    <pre><code class="language-bash"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-code"></i>
+                    <span>mzycter0101</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/mzhycter/mzycter0101" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 mzycter0101. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
