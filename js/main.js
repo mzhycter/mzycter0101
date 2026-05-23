@@ -527,3 +527,276 @@ console.log('%c欢迎来到 mzycter0101 工具集!',
     'color: #58a6ff; font-size: 20px; font-weight: bold;');
 console.log('%cGitHub: https://github.com/mzhycter/mzycter0101', 
     'color: #8b949e;');
+
+// ========================================
+// 在线工具功能
+// ========================================
+
+// 通用：复制到剪贴板
+function copyToClipboard(elementId) {
+    const el = document.getElementById(elementId);
+    if (!el || !el.value) return;
+    
+    el.select();
+    document.execCommand('copy');
+    
+    // 显示提示
+    showToast('已复制到剪贴板！');
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-success);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        z-index: 9999;
+        animation: fadeInUp 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+}
+
+// 1. 密码生成器
+function updatePwdLength() {
+    document.getElementById('pwd-length-val').textContent = document.getElementById('pwd-length').value;
+}
+
+function generatePassword() {
+    const length = parseInt(document.getElementById('pwd-length').value);
+    const useUpper = document.getElementById('pwd-upper').checked;
+    const useLower = document.getElementById('pwd-lower').checked;
+    const useDigits = document.getElementById('pwd-digits').checked;
+    const useSymbols = document.getElementById('pwd-symbols').checked;
+    
+    let chars = '';
+    if (useLower) chars += 'abcdefghijklmnopqrstuvwxyz';
+    if (useUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (useDigits) chars += '0123456789';
+    if (useSymbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+    
+    if (!chars) {
+        showToast('请至少选择一种字符类型');
+        return;
+    }
+    
+    let password = '';
+    const array = new Uint32Array(length);
+    crypto.getRandomValues(array);
+    
+    for (let i = 0; i < length; i++) {
+        password += chars[array[i] % chars.length];
+    }
+    
+    document.getElementById('pwd-result').value = password;
+}
+
+// 2. JSON 工具
+function formatJSON() {
+    const input = document.getElementById('json-input').value;
+    const output = document.getElementById('json-output');
+    const status = document.getElementById('json-status');
+    
+    try {
+        const obj = JSON.parse(input);
+        output.value = JSON.stringify(obj, null, 2);
+        status.textContent = '✅ JSON 格式有效';
+        status.className = 'status-msg success';
+    } catch (e) {
+        status.textContent = '❌ ' + e.message;
+        status.className = 'status-msg error';
+    }
+}
+
+function minifyJSON() {
+    const input = document.getElementById('json-input').value;
+    const output = document.getElementById('json-output');
+    const status = document.getElementById('json-status');
+    
+    try {
+        const obj = JSON.parse(input);
+        output.value = JSON.stringify(obj);
+        status.textContent = '✅ 已压缩';
+        status.className = 'status-msg success';
+    } catch (e) {
+        status.textContent = '❌ ' + e.message;
+        status.className = 'status-msg error';
+    }
+}
+
+function validateJSON() {
+    const input = document.getElementById('json-input').value;
+    const status = document.getElementById('json-status');
+    
+    try {
+        JSON.parse(input);
+        status.textContent = '✅ JSON 格式有效';
+        status.className = 'status-msg success';
+    } catch (e) {
+        status.textContent = '❌ ' + e.message;
+        status.className = 'status-msg error';
+    }
+}
+
+// 3. Base64 编解码
+function base64Encode() {
+    const input = document.getElementById('base64-input').value;
+    try {
+        document.getElementById('base64-output').value = btoa(unescape(encodeURIComponent(input)));
+    } catch (e) {
+        document.getElementById('base64-output').value = '编码错误: ' + e.message;
+    }
+}
+
+function base64Decode() {
+    const input = document.getElementById('base64-input').value;
+    try {
+        document.getElementById('base64-output').value = decodeURIComponent(escape(atob(input)));
+    } catch (e) {
+        document.getElementById('base64-output').value = '解码错误: 无效的 Base64 字符串';
+    }
+}
+
+// 4. 哈希计算
+async function calculateHash() {
+    const input = document.getElementById('hash-input').value;
+    const algo = document.getElementById('hash-algo').value;
+    const resultDiv = document.getElementById('hash-results');
+    
+    if (!input) {
+        resultDiv.innerHTML = '<p style="color: var(--text-muted);">请输入文本</p>';
+        return;
+    }
+    
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    
+    // 计算所有哈希
+    const algos = ['MD5', 'SHA1', 'SHA256', 'SHA512'];
+    let html = '';
+    
+    for (const a of algos) {
+        if (a === 'MD5') {
+            // MD5 需要额外库，这里显示提示
+            html += `<div class="hash-item"><span class="hash-name">${a}:</span> <span class="hash-value">请使用 Python 版本计算 MD5</span></div>`;
+        } else {
+            const hashBuffer = await crypto.subtle.digest(a, data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            const isSelected = a === algo;
+            html += `<div class="hash-item ${isSelected ? 'active' : ''}"><span class="hash-name">${a}:</span> <code class="hash-value">${hashHex}</code></div>`;
+        }
+    }
+    
+    resultDiv.innerHTML = html;
+}
+
+// 5. 文本对比
+function compareText() {
+    const textA = document.getElementById('diff-a').value;
+    const textB = document.getElementById('diff-b').value;
+    const resultDiv = document.getElementById('diff-result');
+    
+    if (textA === textB) {
+        resultDiv.innerHTML = '<p class="diff-same">✅ 两段文本完全相同</p>';
+        return;
+    }
+    
+    const linesA = textA.split('\n');
+    const linesB = textB.split('\n');
+    const maxLines = Math.max(linesA.length, linesB.length);
+    
+    let html = '<div class="diff-lines">';
+    for (let i = 0; i < maxLines; i++) {
+        const lineA = linesA[i] || '';
+        const lineB = linesB[i] || '';
+        const lineNum = i + 1;
+        
+        if (lineA === lineB) {
+            html += `<div class="diff-line same"><span class="ln">${lineNum}</span><span class="content">${escapeHtml(lineA)}</span></div>`;
+        } else {
+            html += `<div class="diff-line removed"><span class="ln">${lineNum}</span><span class="content">-${escapeHtml(lineA)}</span></div>`;
+            html += `<div class="diff-line added"><span class="ln">${lineNum}</span><span class="content">+${escapeHtml(lineB)}</span></div>`;
+        }
+    }
+    html += '</div>';
+    
+    resultDiv.innerHTML = html;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// 6. URL 编解码
+function urlEncode() {
+    const input = document.getElementById('url-input').value;
+    document.getElementById('url-output').value = encodeURIComponent(input);
+}
+
+function urlDecode() {
+    const input = document.getElementById('url-input').value;
+    try {
+        document.getElementById('url-output').value = decodeURIComponent(input);
+    } catch (e) {
+        document.getElementById('url-output').value = '解码错误: 无效的 URL 编码';
+    }
+}
+
+// 7. 时间戳转换
+function timestampToDate() {
+    const ts = document.getElementById('timestamp-input').value;
+    if (!ts) return;
+    
+    const date = new Date(parseInt(ts) * 1000);
+    const iso = date.toISOString().slice(0, 16);
+    document.getElementById('datetime-input').value = iso;
+    document.getElementById('timestamp-result').value = date.toLocaleString('zh-CN');
+}
+
+function dateToTimestamp() {
+    const dt = document.getElementById('datetime-input').value;
+    if (!dt) return;
+    
+    const timestamp = Math.floor(new Date(dt).getTime() / 1000);
+    document.getElementById('timestamp-input').value = timestamp;
+    document.getElementById('timestamp-result').value = timestamp;
+}
+
+function setCurrentTime() {
+    const now = new Date();
+    const timestamp = Math.floor(now.getTime() / 1000);
+    document.getElementById('timestamp-input').value = timestamp;
+    document.getElementById('datetime-input').value = now.toISOString().slice(0, 16);
+    document.getElementById('timestamp-result').value = now.toLocaleString('zh-CN');
+}
+
+// 8. 二维码生成
+function generateQR() {
+    const text = document.getElementById('qr-input').value;
+    const size = document.getElementById('qr-size').value;
+    const resultDiv = document.getElementById('qr-result');
+    
+    if (!text) {
+        resultDiv.innerHTML = '<p style="color: var(--text-muted);">请输入文本或 URL</p>';
+        return;
+    }
+    
+    // 使用 Google Chart API 生成二维码
+    const encoded = encodeURIComponent(text);
+    const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encoded}`;
+    
+    resultDiv.innerHTML = `
+        <img src="${url}" alt="QR Code" style="margin-top: 15px; border-radius: 8px;">
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">右键保存图片</p>
+    `;
+}

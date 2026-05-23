@@ -32,6 +32,9 @@
                 <a href="#security" class="nav-link" data-section="security">
                     <i class="fas fa-shield-alt"></i> 安全工具
                 </a>
+                <a href="#online" class="nav-link" data-section="online">
+                    <i class="fas fa-globe"></i> 在线工具
+                </a>
                 <a href="#about" class="nav-link" data-section="about">
                     <i class="fas fa-user"></i> 关于
                 </a>
@@ -423,6 +426,236 @@
                                 <i class="fas fa-download"></i> 下载
                             </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 在线工具区域 -->
+    <section id="online" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-globe"></i> 在线工具
+                </h2>
+                <p class="section-desc">无需安装，直接在浏览器中使用的小工具</p>
+            </div>
+            
+            <div class="online-tools-grid">
+                <!-- 密码生成器 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-key"></i>
+                        <h3>密码生成器</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <label>密码长度</label>
+                            <input type="range" id="pwd-length" min="8" max="32" value="16" oninput="updatePwdLength()">
+                            <span id="pwd-length-val">16</span>
+                        </div>
+                        <div class="form-checks">
+                            <label><input type="checkbox" id="pwd-upper" checked> 大写字母</label>
+                            <label><input type="checkbox" id="pwd-lower" checked> 小写字母</label>
+                            <label><input type="checkbox" id="pwd-digits" checked> 数字</label>
+                            <label><input type="checkbox" id="pwd-symbols" checked> 特殊字符</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="pwd-result" readonly placeholder="点击生成">
+                        </div>
+                        <button class="btn btn-primary" onclick="generatePassword()">
+                            <i class="fas fa-sync"></i> 生成密码
+                        </button>
+                        <button class="btn btn-outline" onclick="copyToClipboard('pwd-result')">
+                            <i class="fas fa-copy"></i> 复制
+                        </button>
+                    </div>
+                </div>
+
+                <!-- JSON 格式化 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-brackets-curly"></i>
+                        <h3>JSON 格式化</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <textarea id="json-input" placeholder="输入 JSON..." rows="6"></textarea>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="formatJSON()">
+                                <i class="fas fa-align-left"></i> 格式化
+                            </button>
+                            <button class="btn btn-outline" onclick="minifyJSON()">
+                                <i class="fas fa-compress"></i> 压缩
+                            </button>
+                            <button class="btn btn-outline" onclick="validateJSON()">
+                                <i class="fas fa-check"></i> 验证
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="json-output" placeholder="输出结果..." rows="6" readonly></textarea>
+                        </div>
+                        <div id="json-status" class="status-msg"></div>
+                    </div>
+                </div>
+
+                <!-- Base64 编解码 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Base64 编解码</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <textarea id="base64-input" placeholder="输入文本..." rows="4"></textarea>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="base64Encode()">
+                                <i class="fas fa-arrow-right"></i> 编码
+                            </button>
+                            <button class="btn btn-outline" onclick="base64Decode()">
+                                <i class="fas fa-arrow-left"></i> 解码
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="base64-output" placeholder="输出结果..." rows="4" readonly></textarea>
+                        </div>
+                        <button class="btn btn-outline" onclick="copyToClipboard('base64-output')">
+                            <i class="fas fa-copy"></i> 复制结果
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 哈希计算器 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-hashtag"></i>
+                        <h3>哈希计算器</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <textarea id="hash-input" placeholder="输入文本..." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <select id="hash-algo">
+                                <option value="MD5">MD5</option>
+                                <option value="SHA1">SHA1</option>
+                                <option value="SHA256" selected>SHA256</option>
+                                <option value="SHA512">SHA512</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="calculateHash()">
+                            <i class="fas fa-calculator"></i> 计算哈希
+                        </button>
+                        <div class="hash-results" id="hash-results"></div>
+                    </div>
+                </div>
+
+                <!-- 文本对比 -->
+                <div class="online-tool-card wide">
+                    <div class="online-tool-header">
+                        <i class="fas fa-columns"></i>
+                        <h3>文本差异对比</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="diff-container">
+                            <div class="diff-col">
+                                <label>文本 A</label>
+                                <textarea id="diff-a" placeholder="输入文本 A..." rows="8"></textarea>
+                            </div>
+                            <div class="diff-col">
+                                <label>文本 B</label>
+                                <textarea id="diff-b" placeholder="输入文本 B..." rows="8"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="compareText()">
+                            <i class="fas fa-balance-scale"></i> 对比差异
+                        </button>
+                        <div id="diff-result" class="diff-result"></div>
+                    </div>
+                </div>
+
+                <!-- URL 编解码 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-link"></i>
+                        <h3>URL 编解码</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <textarea id="url-input" placeholder="输入 URL 或文本..." rows="4"></textarea>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="urlEncode()">
+                                <i class="fas fa-arrow-right"></i> 编码
+                            </button>
+                            <button class="btn btn-outline" onclick="urlDecode()">
+                                <i class="fas fa-arrow-left"></i> 解码
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="url-output" placeholder="输出结果..." rows="4" readonly></textarea>
+                        </div>
+                        <button class="btn btn-outline" onclick="copyToClipboard('url-output')">
+                            <i class="fas fa-copy"></i> 复制结果
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 时间戳转换 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-clock"></i>
+                        <h3>时间戳转换</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <label>时间戳 (秒)</label>
+                            <input type="number" id="timestamp-input" placeholder="输入时间戳...">
+                        </div>
+                        <button class="btn btn-primary" onclick="timestampToDate()">
+                            <i class="fas fa-arrow-right"></i> 转日期
+                        </button>
+                        <div class="form-group">
+                            <label>日期时间</label>
+                            <input type="datetime-local" id="datetime-input">
+                        </div>
+                        <button class="btn btn-outline" onclick="dateToTimestamp()">
+                            <i class="fas fa-arrow-left"></i> 转时间戳
+                        </button>
+                        <div class="form-group">
+                            <input type="text" id="timestamp-result" readonly placeholder="结果">
+                        </div>
+                        <button class="btn btn-sm btn-outline" onclick="setCurrentTime()">
+                            <i class="fas fa-clock"></i> 当前时间
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 二维码生成器 -->
+                <div class="online-tool-card">
+                    <div class="online-tool-header">
+                        <i class="fas fa-qrcode"></i>
+                        <h3>二维码生成器</h3>
+                    </div>
+                    <div class="online-tool-body">
+                        <div class="form-group">
+                            <textarea id="qr-input" placeholder="输入文本或 URL..." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>尺寸</label>
+                            <select id="qr-size">
+                                <option value="150">小 (150x150)</option>
+                                <option value="200" selected>中 (200x200)</option>
+                                <option value="300">大 (300x300)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateQR()">
+                            <i class="fas fa-qrcode"></i> 生成二维码
+                        </button>
+                        <div id="qr-result" class="qr-result"></div>
                     </div>
                 </div>
             </div>
