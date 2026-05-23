@@ -23,8 +23,14 @@
                 <a href="#crawlers" class="nav-link" data-section="crawlers">
                     <i class="fas fa-spider"></i> 爬虫工具
                 </a>
+                <a href="#academic" class="nav-link" data-section="academic">
+                    <i class="fas fa-graduation-cap"></i> 学术工具
+                </a>
                 <a href="#utilities" class="nav-link" data-section="utilities">
                     <i class="fas fa-tools"></i> 实用脚本
+                </a>
+                <a href="#security" class="nav-link" data-section="security">
+                    <i class="fas fa-shield-alt"></i> 安全工具
                 </a>
                 <a href="#about" class="nav-link" data-section="about">
                     <i class="fas fa-user"></i> 关于
@@ -48,7 +54,7 @@
             <p class="hero-subtitle">实用的Python工具集合，助力日常开发与数据处理</p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number" data-count="6">0</span>
+                    <span class="stat-number" data-count="12">0</span>
                     <span class="stat-label">工具数量</span>
                 </div>
                 <div class="stat-item">
@@ -57,6 +63,10 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number" data-count="3">0</span>
+                    <span class="stat-label">学术工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="6">0</span>
                     <span class="stat-label">实用脚本</span>
                 </div>
             </div>
@@ -162,6 +172,92 @@
         </div>
     </section>
 
+    <!-- 学术工具区域 -->
+    <section id="academic" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i> 学术工具集
+                </h2>
+                <p class="section-desc">论文查重、文献检索、文章质量分析</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- 论文查重 -->
+                <div class="tool-card" data-tool="plagiarism-checker">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #a371f7, #6e40c9);">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">论文查重工具</h3>
+                        <p class="tool-desc">基于N-gram、SimHash、余弦相似度的多算法查重检测</p>
+                        <div class="tool-tags">
+                            <span class="tag">SimHash</span>
+                            <span class="tag">Jaccard</span>
+                            <span class="tag">批量查重</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('plagiarism-checker')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/academic/plagiarism_checker.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文献检索 -->
+                <div class="tool-card" data-tool="literature-search">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #a371f7, #6e40c9);">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">文献检索工具</h3>
+                        <p class="tool-desc">多源学术文献搜索，支持APA/MLA/BibTeX引用格式生成</p>
+                        <div class="tool-tags">
+                            <span class="tag">CrossRef</span>
+                            <span class="tag">Semantic Scholar</span>
+                            <span class="tag">引用生成</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('literature-search')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/academic/literature_search.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文章查验 -->
+                <div class="tool-card" data-tool="article-checker">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #a371f7, #6e40c9);">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">文章查验工具</h3>
+                        <p class="tool-desc">文章质量评分、可读性分析、SEO检测、结构评估</p>
+                        <div class="tool-tags">
+                            <span class="tag">质量评分</span>
+                            <span class="tag">可读性</span>
+                            <span class="tag">SEO分析</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('article-checker')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/academic/article_checker.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 实用脚本区域 -->
     <section id="utilities" class="section">
         <div class="container">
@@ -239,6 +335,91 @@
                                 <i class="fas fa-eye"></i> 查看详情
                             </button>
                             <a href="tools/utilities/system_tools.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON工具 -->
+                <div class="tool-card" data-tool="json-toolkit">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #39c5cf, #1a8a91);">
+                        <i class="fas fa-brackets-curly"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">JSON 工具集</h3>
+                        <p class="tool-desc">JSON格式化、校验、路径提取、差异对比、CSV互转</p>
+                        <div class="tool-tags">
+                            <span class="tag">格式化</span>
+                            <span class="tag">差异对比</span>
+                            <span class="tag">CSV转换</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('json-toolkit')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/utilities/json_toolkit.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 图片处理 -->
+                <div class="tool-card" data-tool="image-processor">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #39c5cf, #1a8a91);">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">图片处理工具</h3>
+                        <p class="tool-desc">批量压缩、格式转换、尺寸调整、水印添加、EXIF读取</p>
+                        <div class="tool-tags">
+                            <span class="tag">图片压缩</span>
+                            <span class="tag">格式转换</span>
+                            <span class="tag">水印</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('image-processor')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/utilities/image_processor.py" class="btn btn-sm btn-outline" download>
+                                <i class="fas fa-download"></i> 下载
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 安全工具区域 -->
+    <section id="security" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i> 安全工具集
+                </h2>
+                <p class="section-desc">密码生成、强度检测、哈希计算、编码工具</p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card" data-tool="password-toolkit">
+                    <div class="tool-icon" style="background: linear-gradient(135deg, #f85149, #b62324);">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3 class="tool-title">密码与安全工具</h3>
+                        <p class="tool-desc">强密码生成、密码强度分析、哈希计算、Base64编解码、安全令牌</p>
+                        <div class="tool-tags">
+                            <span class="tag">密码生成</span>
+                            <span class="tag">哈希计算</span>
+                            <span class="tag">Base64</span>
+                        </div>
+                        <div class="tool-actions">
+                            <button class="btn btn-sm btn-primary" onclick="showToolDetail('password-toolkit')">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                            <a href="tools/security/password_toolkit.py" class="btn btn-sm btn-outline" download>
                                 <i class="fas fa-download"></i> 下载
                             </a>
                         </div>
@@ -357,7 +538,7 @@
                     </a>
                 </div>
                 <div class="footer-copyright">
-                    <p>&copy; 2024 mzycter0101. All rights reserved.</p>
+                    <p>Built with ❤️ by mzycter</p>
                 </div>
             </div>
         </div>

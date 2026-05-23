@@ -161,6 +161,163 @@ python system_tools.py env --filter PATH`,
             '命令执行功能'
         ],
         dependencies: 'pip install psutil'
+    },
+    'plagiarism-checker': {
+        title: '论文查重工具',
+        desc: '基于 N-gram 指纹、SimHash 算法和余弦相似度的多算法论文查重检测工具。支持单次对比和批量查重，可生成详细的 JSON 查重报告。',
+        usage: `# 对比两篇文本
+python plagiarism_checker.py compare -a paper_a.txt -b paper_b.txt
+
+# 批量查重（将源文件与目录中所有文件对比）
+python plagiarism_checker.py batch -s thesis.txt -d ./references/ -o report.json
+
+# 自定义相似度阈值
+python plagiarism_checker.py compare -a a.txt -b b.txt -t 0.2`,
+        features: [
+            'N-gram Jaccard 相似度',
+            'SimHash 指纹算法',
+            '余弦相似度计算',
+            '综合加权评分',
+            '批量查重报告',
+            '可自定义阈值'
+        ],
+        dependencies: '无需额外依赖（纯Python实现）'
+    },
+    'literature-search': {
+        title: '文献检索工具',
+        desc: '多源学术文献搜索工具，支持 CrossRef、Semantic Scholar、Google Scholar 等数据源。可自动生成 APA、MLA、BibTeX 等多种引用格式。',
+        usage: `# 搜索文献（默认使用 CrossRef + Semantic Scholar）
+python literature_search.py "deep learning"
+
+# 指定搜索来源
+python literature_search.py "machine learning" -s crossref semantic
+
+# 生成 APA 引用格式
+python literature_search.py "transformer" -f citations -c apa
+
+# 保存为文本格式
+python literature_search.py "GPT" -o results.txt -f txt`,
+        features: [
+            'CrossRef API 检索',
+            'Semantic Scholar API',
+            'Google Scholar 解析',
+            'APA/MLA/BibTeX 引用',
+            '批量结果保存',
+            'DOI 自动提取'
+        ],
+        dependencies: 'pip install requests beautifulsoup4'
+    },
+    'article-checker': {
+        title: '文章查验工具',
+        desc: '综合文章质量分析工具，从可读性、SEO友好度、文章结构、词汇丰富度等多个维度进行评分，生成详细的质量分析报告。',
+        usage: `# 分析文章质量
+python article_checker.py -i article.txt
+
+# 保存分析报告为 JSON
+python article_checker.py -i article.txt -o report.json`,
+        features: [
+            '综合质量评分 (A-F)',
+            '可读性分析',
+            'SEO 友好度检测',
+            '文章结构评估',
+            '词汇丰富度 (TTR)',
+            '改进建议输出'
+        ],
+        dependencies: '无需额外依赖（纯Python实现）'
+    },
+    'json-toolkit': {
+        title: 'JSON 工具集',
+        desc: '多功能 JSON 处理工具，支持格式化、校验、路径提取、嵌套展平、差异对比以及 JSON 与 CSV 互转。',
+        usage: `# 格式化 JSON
+python json_toolkit.py format -i data.json -o formatted.json
+
+# 校验 JSON
+python json_toolkit.py validate -i data.json
+
+# 提取路径值
+python json_toolkit.py extract -i data.json -p "data.users.0.name"
+
+# 对比两个 JSON
+python json_toolkit.py diff -a old.json -b new.json
+
+# JSON 转 CSV
+python json_toolkit.py to-csv -i data.json
+
+# CSV 转 JSON
+python json_toolkit.py to-json -i data.csv`,
+        features: [
+            'JSON 格式化/美化',
+            '语法校验',
+            '点号路径提取',
+            '嵌套结构展平',
+            'JSON 差异对比',
+            'JSON ↔ CSV 互转'
+        ],
+        dependencies: '无需额外依赖（纯Python实现）'
+    },
+    'image-processor': {
+        title: '图片处理工具',
+        desc: '批量图片处理工具，支持压缩、格式转换、尺寸调整、文字水印添加和 EXIF 元数据读取。',
+        usage: `# 压缩单张图片
+python image_processor.py compress -i photo.jpg -q 80
+
+# 批量压缩目录下所有图片
+python image_processor.py compress -i ./photos --batch -r
+
+# 格式转换
+python image_processor.py convert -i photo.png -o photo.webp -f WEBP
+
+# 调整尺寸
+python image_processor.py resize -i photo.jpg -W 800
+
+# 添加水印
+python image_processor.py watermark -i photo.jpg -t "mzycter" -p bottom-right
+
+# 读取 EXIF 信息
+python image_processor.py exif -i photo.jpg`,
+        features: [
+            '批量图片压缩',
+            '格式转换 (PNG/JPG/WEBP)',
+            '尺寸缩放',
+            '文字水印',
+            'EXIF 信息读取',
+            '递归目录处理'
+        ],
+        dependencies: 'pip install Pillow'
+    },
+    'password-toolkit': {
+        title: '密码与安全工具',
+        desc: '集密码生成、强度分析、哈希计算、Base64编解码、安全令牌生成于一体的安全工具集。',
+        usage: `# 生成16位强密码
+python password_toolkit.py generate -l 16
+
+# 生成易记密码短语
+python password_toolkit.py generate --passphrase -w 5
+
+# 分析密码强度
+python password_toolkit.py analyze -p "MyP@ssw0rd!"
+
+# 计算文本哈希
+python password_toolkit.py hash -t "hello world" -a sha256
+
+# 计算文件哈希
+python password_toolkit.py hash -f document.pdf
+
+# Base64 编码/解码
+python password_toolkit.py base64 -t "hello"
+python password_toolkit.py base64 -t "aGVsbG8=" -d
+
+# 生成安全令牌
+python password_toolkit.py token -l 32`,
+        features: [
+            '随机密码生成',
+            '密码短语生成',
+            '密码强度分析',
+            'MD5/SHA1/SHA256/SHA512',
+            'Base64 编解码',
+            '安全令牌生成'
+        ],
+        dependencies: '无需额外依赖（纯Python实现）'
     }
 };
 
